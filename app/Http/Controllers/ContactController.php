@@ -13,6 +13,7 @@ class ContactController extends Controller
     public function index()
     {
         //
+        return view('contact.index');
     }
 
     /**
@@ -21,7 +22,7 @@ class ContactController extends Controller
     public function create()
     {
         //
-        return view('contact.index');
+        return view('contact.create');
     }
 
     /**
@@ -29,21 +30,28 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 1. Validation Logic
         $request->validate([
-            'name' => ['required', 'string', 'min:5', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => [
+                'required', 
+                'string', 
+                'min:5', 
+                'max:255', 
+                // Blocks numbers, special chars, and double spaces. Supports accents.
+                'regex:/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/'
+            ],
             'contact' => ['required', 'digits:9'],
             'email' => ['required', 'email', 'unique:contacts,email'],
+        ], [
+            'name.regex' => 'The name cannot contain numbers or special characters.',
+            'contact.digits' => 'The contact must be exactly 9 digits.',
         ]);
 
-        Contact::create([
-            'name' => $request->input('name'),
-            'contact' => $request->input('contact'),
-            'email' => $request->input('email'),
-        ]);
+        // 2. Create the Contact
+        Contact::create($request->only(['name', 'contact', 'email']));
 
-        return redirect()->back()->with('success', 'Contact added successfully!');
-
+        // 3. Redirect back with success message
+        return redirect()->back()->with('success', 'Contact created successfully!');
     }
 
     /**

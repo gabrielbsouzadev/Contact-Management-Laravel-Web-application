@@ -26,12 +26,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
 
      // Routes for contact management
-<<<<<<< HEAD
-    Route::get('/contact-list', function () {
-        return view('contact.index');
-    })->name('contact.index');   
-=======
->>>>>>> 241d3c3 (Remove contact list route from web.php)
+    Route::get('/contact-index', [ContactController::class, 'index'])->name('contact.index');
     Route::get('/contact-create', [ContactController::class, 'create'])->name('contact.create');
     Route::post('/contact-store', [ContactController::class, 'store'])->name('contact.store');
 

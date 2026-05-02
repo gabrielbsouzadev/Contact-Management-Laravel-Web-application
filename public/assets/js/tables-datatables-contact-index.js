@@ -19,8 +19,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
           offCanvasEl = new bootstrap.Offcanvas(offCanvasElement);
           // Empty fields on offCanvas open
           (offCanvasElement.querySelector('.dt-full-name').value = ''),
-            (offCanvasElement.querySelector('.dt-contact').value = ''),
-            (offCanvasElement.querySelector('.dt-email').value = '');
+            (offCanvasElement.querySelector('.dt-post').value = ''),
+            (offCanvasElement.querySelector('.dt-email').value = ''),
+            (offCanvasElement.querySelector('.dt-date').value = ''),
+            (offCanvasElement.querySelector('.dt-salary').value = '');
           // Open offCanvas with form
           offCanvasEl.show();
         });
@@ -37,10 +39,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }
           }
         },
-        basicContact: {
+        basicPost: {
           validators: {
             notEmpty: {
-              message: 'Contact field is required'
+              message: 'Post field is required'
             }
           }
         },
@@ -54,6 +56,24 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }
           }
         },
+        basicDate: {
+          validators: {
+            notEmpty: {
+              message: 'Joining Date is required'
+            },
+            date: {
+              format: 'MM/DD/YYYY',
+              message: 'The value is not a valid date'
+            }
+          }
+        },
+        basicSalary: {
+          validators: {
+            notEmpty: {
+              message: 'Basic Salary is required'
+            }
+          }
+        }
       },
       plugins: {
         trigger: new FormValidation.plugins.Trigger(),
@@ -76,7 +96,16 @@ document.addEventListener('DOMContentLoaded', function (e) {
       }
     });
 
-    
+    // FlatPickr Initialization & Validation
+    flatpickr(formAddNewRecord.querySelector('[name="basicDate"]'), {
+      enableTime: false,
+      // See https://flatpickr.js.org/formatting/
+      dateFormat: 'm/d/Y',
+      // After selecting a date, we need to revalidate the field
+      onChange: function () {
+        fv.revalidateField('basicDate');
+      }
+    });
   })();
 });
 
@@ -268,10 +297,7 @@ $(function () {
             }
           ]
         },
-        {
-          text: '<i class="bx bx-plus me-sm-2"></i> <span class="d-none d-sm-inline-block">Add New Record</span>',
-          className: 'create-new btn btn-primary'
-        }
+        
       ],
       responsive: {
         details: {
@@ -306,7 +332,7 @@ $(function () {
         }
       }
     });
-    $('div.head-label').html('<h5 class="card-title mb-0">DataTable with Buttons</h5>');
+    $('div.head-label').html('<a href="/contact-create" class="btn btn-primary"><i class="bx bx-plus me-sm-2"></i>Add new contact</a>');
   }
 
   // Add New record
@@ -315,7 +341,7 @@ $(function () {
   // On form submit, if form is valid
   fv.on('core.form.valid', function () {
     var $new_name = $('.add-new-record .dt-full-name').val(),
-      $new_post = $('.add-new-record .dt-contact').val(),
+      $new_post = $('.add-new-record .dt-post').val(),
       $new_email = $('.add-new-record .dt-email').val(),
       $new_date = $('.add-new-record .dt-date').val(),
       $new_salary = $('.add-new-record .dt-salary').val();

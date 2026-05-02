@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Welcome</title>
+    <title>Contacts</title>
 
     <meta name="description" content="" />
 
@@ -115,40 +115,59 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <!-- DataTable with Buttons -->
                         <div class="card">
-                            <div class="card-datatable table-responsive pt-0">
-                                <table class="datatables-basic table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th>id</th>
-                                            <th>Name</th>
-                                            <th>Contact</th>
-                                            <th>Email</th>
-                                            <th>Date</th>
-                                            <th>Salary</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                </table>
+                            <div class="container mt-4">
+                                <form id="editUserForm" class="row g-3" onsubmit="return false">
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="modalEditUserFirstName">First Name</label>
+                                        <input
+                                            type="text"
+                                            id="modalEditUserFirstName"
+                                            name="modalEditUserFirstName"
+                                            class="form-control"
+                                            placeholder="John" />
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="modalEditUserLastName">Last Name</label>
+                                        <input
+                                            type="text"
+                                            id="modalEditUserLastName"
+                                            name="modalEditUserLastName"
+                                            class="form-control"
+                                            placeholder="Doe" />
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="modalEditUserName">Username</label>
+                                        <input
+                                            type="text"
+                                            id="modalEditUserName"
+                                            name="modalEditUserName"
+                                            class="form-control"
+                                            placeholder="john.doe.007" />
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="modalEditUserEmail">Email</label>
+                                        <input
+                                            type="text"
+                                            id="modalEditUserEmail"
+                                            name="modalEditUserEmail"
+                                            class="form-control"
+                                            placeholder="example@domain.com" />
+                                    </div>
+                                  
+                                    <div class="col-12 text-center mt-4">
+                                        <button type="submit" class="btn btn-primary me-1 me-sm-3">Submit</button>
+                                        <button
+                                            type="reset"
+                                            class="btn btn-label-secondary"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                        </div>
-                        <!-- Modal to add new record -->
-                        <div class="offcanvas offcanvas-end" id="add-new-record">
-                            <div class="offcanvas-header border-bottom">
-                                <h5 class="offcanvas-title" id="exampleModalLabel">New Record</h5>
-                                <button
-                                    type="button"
-                                    class="btn-close text-reset"
-                                    data-bs-dismiss="offcanvas"
-                                    aria-label="Close"></button>
-                            </div>
-                           
                         </div>
                         <!--/ DataTable with Buttons -->
-
-
                     </div>
                     <!-- / Content -->
 
@@ -194,6 +213,13 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="../../assets/vendor/libs/cleavejs/cleave.js"></script>
+    <script src="../../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+    <script src="../../assets/vendor/libs/select2/select2.js"></script>
+    <script src="../../assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js"></script>
+    <script src="../../assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
+    <script src="../../assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
+
     <script src="../../assets/vendor/libs/datatables/jquery.dataTables.js"></script>
     <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="../../assets/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
@@ -219,8 +245,9 @@
     <!-- Main JS -->
     <script src="../../assets/js/main.js"></script>
 
-    <!-- Page JS -->
-    <script src="../../assets/js/tables-datatables-contact-welcome.js"></script>
+    <script src="../../assets/js/modal-edit-user.js"></script>
+
+
 </body>
 
 </html>
