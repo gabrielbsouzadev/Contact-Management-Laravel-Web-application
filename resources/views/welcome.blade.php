@@ -319,7 +319,7 @@
     <script src="../../assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="../../assets/js/tables-datatables-basic.js"></script>
+    <script src="../../assets/js/tables-datatables-contact.js"></script>
 </body>
 
 </html>
