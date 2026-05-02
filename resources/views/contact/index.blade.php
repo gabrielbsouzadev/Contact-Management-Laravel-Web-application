@@ -75,7 +75,7 @@
 
             <!-- Layout container -->
             <div class="layout-page">
-                
+
                 <!-- Navbar -->
                 @if (Route::has('login'))
                 <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
@@ -112,6 +112,80 @@
                 <div class="content-wrapper">
                     <!-- Content -->
 
+                    <!--  Edit User -->
+                    <div class="col-12 col-sm-6 col-lg-4 mb-4 mb-md-0">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="bx bx-md bx-user mb-3"></i>
+                                <h5>Edit User</h5>
+                                <p>Easily update the user data on the go, built in form validation and custom controls.</p>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUser">
+                                    Show
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/  Edit User -->
+
+                    <!-- Edit User Modal -->
+                    <div class="modal fade" id="editUser" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+                            <div class="modal-content p-3 p-md-5">
+                                <div class="modal-body">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="text-center mb-4">
+                                        <h3>Edit User Information</h3>
+                                        <p>Updating user details will receive a privacy audit.</p>
+                                    </div>
+                                    <form id="editUserForm" class="row g-3" method="POST" action="{{ route('contact.store') }}">
+                                        @csrf
+                                        <div class="col-12 col-md-6">
+                                            <label class="form-label" for="modalEditUserFirstName">First Name</label>
+                                            <input
+                                                type="text"
+                                                id="modalEditUserFirstName"
+                                                name="modalEditUserFirstName"
+                                                class="form-control"
+                                                placeholder="John" />
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label class="form-label" for="modalEditUserLastName">Last Name</label>
+                                            <input
+                                                type="text"
+                                                id="modalEditUserLastName"
+                                                name="modalEditUserLastName"
+                                                class="form-control"
+                                                placeholder="Doe" />
+                                        </div>
+                                        
+                                        <div class="col-12 col-md-6">
+                                            <label class="form-label" for="modalEditUserEmail">Email</label>
+                                            <input
+                                                type="text"
+                                                id="modalEditUserEmail"
+                                                name="modalEditUserEmail"
+                                                class="form-control"
+                                                placeholder="example@domain.com" />
+                                        </div>
+                                    
+                                        <div class="col-12 text-center mt-4">
+                                            <button type="submit" class="btn btn-primary me-1 me-sm-3">Submit</button>
+                                            <button
+                                                type="reset"
+                                                class="btn btn-label-secondary"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ Edit User Modal -->
+
+
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <!-- DataTable with Buttons -->
                         <div class="card">
@@ -145,7 +219,8 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body flex-grow-1">
-                                <form class="add-new-record row g-2 pt-0" id="form-add-new-record" onsubmit="return false">
+                                <form class="add-new-record row g-2 pt-0" id="form-add-new-record" method="POST" action="{{ route('contact.store') }}">
+                                    @csrf
                                     <div class="col-sm-12">
                                         <label class="form-label" for="basicFullname">Full Name</label>
                                         <div class="input-group input-group-merge">
@@ -161,17 +236,17 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <label class="form-label" for="basicPost">Post</label>
+                                        <label class="form-label" for="basicContact">Contact</label>
                                         <div class="input-group input-group-merge">
-                                            <span id="basicPost2" class="input-group-text"><i class="bx bxs-briefcase"></i></span>
+                                            <span id="basicContact2" class="input-group-text"><i class="bx bxs-phone"></i></span>
                                             <input
                                                 type="text"
-                                                id="basicPost"
-                                                name="basicPost"
-                                                class="form-control dt-post"
-                                                placeholder="Web Developer"
-                                                aria-label="Web Developer"
-                                                aria-describedby="basicPost2" />
+                                                id="basicContact"
+                                                name="basicContact"
+                                                class="form-control dt-contact"
+                                                placeholder="Contact Number"
+                                                aria-label="Contact"
+                                                aria-describedby="basicContact2" />
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -188,34 +263,7 @@
                                         </div>
                                         <div class="form-text">You can use letters, numbers & periods</div>
                                     </div>
-                                    <div class="col-sm-12">
-                                        <label class="form-label" for="basicDate">Joining Date</label>
-                                        <div class="input-group input-group-merge">
-                                            <span id="basicDate2" class="input-group-text"><i class="bx bx-calendar"></i></span>
-                                            <input
-                                                type="text"
-                                                class="form-control dt-date"
-                                                id="basicDate"
-                                                name="basicDate"
-                                                aria-describedby="basicDate2"
-                                                placeholder="MM/DD/YYYY"
-                                                aria-label="MM/DD/YYYY" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <label class="form-label" for="basicSalary">Salary</label>
-                                        <div class="input-group input-group-merge">
-                                            <span id="basicSalary2" class="input-group-text"><i class="bx bx-dollar"></i></span>
-                                            <input
-                                                type="number"
-                                                id="basicSalary"
-                                                name="basicSalary"
-                                                class="form-control dt-salary"
-                                                placeholder="12000"
-                                                aria-label="12000"
-                                                aria-describedby="basicSalary2" />
-                                        </div>
-                                    </div>
+
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-primary data-submit me-1 me-sm-3">Submit</button>
                                         <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">Cancel</button>
@@ -271,6 +319,13 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="../../assets/vendor/libs/cleavejs/cleave.js"></script>
+    <script src="../../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+    <script src="../../assets/vendor/libs/select2/select2.js"></script>
+    <script src="../../assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js"></script>
+    <script src="../../assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
+    <script src="../../assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
+
     <script src="../../assets/vendor/libs/datatables/jquery.dataTables.js"></script>
     <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="../../assets/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
@@ -298,6 +353,7 @@
 
     <!-- Page JS -->
     <script src="../../assets/js/tables-datatables-contact-create.js"></script>
+    <script src="../../assets/js/modal-edit-user.js"></script>
 </body>
 
 </html>
