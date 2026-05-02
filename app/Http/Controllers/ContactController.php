@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
@@ -30,10 +31,19 @@ class ContactController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'message' => 'required',
+            'name' => ['required', 'string', 'min:5', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
+            'contact' => ['required', 'digits:9'],
+            'email' => ['required', 'email', 'unique:contacts,email'],
         ]);
+
+        Contact::create([
+            'name' => $request->input('name'),
+            'contact' => $request->input('contact'),
+            'email' => $request->input('email'),
+        ]);
+
+        return redirect()->back()->with('success', 'Contact added successfully!');
+
     }
 
     /**
