@@ -146,6 +146,7 @@
                                             <th></th>
                                             <th>id</th>
                                             <th>Name</th>
+                                            <th>Contact</th>
                                             <th>Email</th>
                                             <th>Date</th>
                                             <th>Salary</th>
