@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Welcome</title>
+    <title>Contacts</title>
 
     <meta name="description" content="" />
 
@@ -75,7 +75,7 @@
 
             <!-- Layout container -->
             <div class="layout-page">
-
+                
                 <!-- Navbar -->
                 @if (Route::has('login'))
                 <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
@@ -297,7 +297,7 @@
     <script src="../../assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="../../assets/js/tables-datatables-contact-list.js"></script>
+    <script src="../../assets/js/tables-datatables-contact-create.js"></script>
 </body>
 
 </html>
